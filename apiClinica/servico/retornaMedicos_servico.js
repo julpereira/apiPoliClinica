@@ -10,7 +10,7 @@ export async function retornaMedicos() {
 
 export async function retornaMedicosNome(nome) {
     const conexao = await pool.getConnection();
-    const query = 'SELECT id, nome, telefone, especialidade FROM medicos WHERE nome = ' + nome;
+    const query = 'SELECT id, nome, telefone, especialidade FROM medicos WHERE nome = "' + nome + '"';
     const medicos = executaQuery(conexao, query);
     conexao.release();
     return medicos;
