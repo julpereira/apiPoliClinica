@@ -2,8 +2,8 @@ import mysql from 'mysql2/promise';
 
 const pool = mysql.createPool({
 host: 'localhost',
-user: 'Local instance MYSQL80',
-password: 'Suporte99',
+user: 'policlinica',
+password: 'poli123',
 database: 'clinica'
 });
 
