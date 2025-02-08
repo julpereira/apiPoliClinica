@@ -3,7 +3,6 @@ import express from 'express';
 import { retornaMedicos, retornaMedicosNome, retornaMedicosEspecialidade } from './servico/retornaMedicos_servico.js';
 
 const app = express();
-const porta = 3000;
 
 app.get('/medicos', async (req, res) => {
     const { nome, especialidade } = req.query;
@@ -20,6 +19,7 @@ app.get('/medicos', async (req, res) => {
     res.json(medicos);
 });
 
-app.listen(porta, () => {
-    console.log(`Servidor rodando na porta ${porta}`);
-});
+app.listen(9000, async () => {
+    const data = new Date();
+    console.log("Servidor node iniciado em:" +data);
+})
