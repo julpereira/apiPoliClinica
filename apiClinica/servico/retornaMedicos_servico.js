@@ -10,6 +10,14 @@ export async function retornaMedicosNome(nome) {
     return resultado[0]; 
 }
 
+export async function retornaMedicosID(id) {
+    const conexao = await pool.getConnection();
+    const query = 'SELECT id, nome, telefone, email, especialidade FROM medicos WHERE id = ' +id;
+    const medicos = executaQuery(conexao, query);
+    conexao.release();
+    return medicos;
+} 
+
 export async function retornaMedicosEspecialidade(especialidadeParcial) {
     try {
         const [resultadoMedicos] = await pool.execute(
@@ -26,4 +34,10 @@ export async function retornaMedicosEspecialidade(especialidadeParcial) {
         console.error('Erro ao buscar médicos por especialidade:', erro);
         res.status(500).json({ mensagem: "Erro interno do servidor."});
     }
+}
+
+async function executaQuery(conexao,query) {
+    const resultado_query = await conexao.execute(query);
+    const resposta = resultado_query[0];
+    return resposta;
 }

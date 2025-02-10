@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { retornaMedicos, retornaMedicosNome, retornaMedicosEspecialidade } from './servico/retornaMedicos_servico.js';
+import { retornaMedicos, retornaMedicosID, retornaMedicosNome, retornaMedicosEspecialidade } from './servico/retornaMedicos_servico.js';
 
 const app = express();
 
@@ -17,6 +17,16 @@ app.get('/medicos', async (req, res) => {
     }
 
     res.json(medicos);
+});
+
+app.get('/medicos/:id', async (req, res) => {
+    const id = parseInt(req.params.id);
+    const medicos = await retornaMedicosID(id);
+    if (medicos.length > 0) {
+        res.json(medicos);
+    } else{
+        res.status(404).json({ Mensagem: "Nenhum médico encontrado"})
+    }
 });
 
 app.listen(9000, async () => {
